@@ -17,7 +17,7 @@ class App extends Component {
   fetchpeople = () => {
     this.resetError();
     axios.get('http://localhost:5000/friends')
-      .then(res => this.setPeople(res.data))
+      .then(res => this.setPeople(res.data)) // res is response
       .catch(this.setError);
   }
 
