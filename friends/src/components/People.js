@@ -1,26 +1,26 @@
 import React from 'react';
+import Friend from './Friend'
 
-const People = props => {
-    return (
-        <div>
+class People extends React.Component {
+    state = {
+
+    }
+
+
+    render() {
+        return (
             <div>
-                {props.people.map(person =>
-                    <div key={person.id}>
-                        Name: {person.name}
-                        <br/>
-                        Age: {person.age}
-                        <br/>
-                        email: {person.email}
-                        <br/>
-                        id: {person.id}
-                        <br/>
-                        <br/>
-                        
-                    </div>
-                )}
+                <div>
+                    {this.props.people.map(person =>
+                        <Friend
+                            person={person}
+                            key={person.id}
+                        />
+                    )}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default People;
