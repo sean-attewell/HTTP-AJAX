@@ -43,6 +43,10 @@ class App extends Component {
     axios.post(friendsURL, { name, age, email })
       .then(res => this.setPeople(res.data))
       .catch(this.setError)
+
+    this.inputNameRef.current.value = '';
+    this.inputAgeRef.current.value = '';
+    this.inputEmailRef.current.value = '';
   }
 
   deletePerson = id => {
@@ -65,6 +69,11 @@ class App extends Component {
     axios.put(`${friendsURL}/${id}`, { name, age, email })
       .then(res => this.setPeople(res.data))
       .catch(this.setError)
+
+    this.editIdRef.current.value = '';
+    this.editNameRef.current.value = '';
+    this.editAgeRef.current.value = '';
+    this.editEmailRef.current.value = '';
   }
 
   // STATE MANAGEMENT
