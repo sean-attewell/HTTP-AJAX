@@ -15,6 +15,10 @@ class App extends Component {
   inputAgeRef = React.createRef();
   inputEmailRef = React.createRef();
 
+  editIdRef = React.createRef();
+  editNameRef = React.createRef();
+  editAgeRef = React.createRef();
+  editEmailRef = React.createRef();
 
   componentDidMount() {
     this.fetchpeople();
@@ -42,11 +46,23 @@ class App extends Component {
   }
 
   deletePerson = id => {
-    // alert(`Are you sure you want to delete person with ID: ${id}`);
 
     this.resetError();
 
     axios.delete(`${friendsURL}/${id}`)
+      .then(res => this.setPeople(res.data))
+      .catch(this.setError)
+  }
+
+  putPerson = () => {
+    this.resetError();
+
+    const id = this.editIdRef.current.value;
+    const name = this.editNameRef.current.value;
+    const age = this.editAgeRef.current.value;
+    const email = this.editEmailRef.current.value;
+
+    axios.put(`${friendsURL}/${id}`, { name, age, email })
       .then(res => this.setPeople(res.data))
       .catch(this.setError)
   }
@@ -76,11 +92,19 @@ class App extends Component {
           />
         </div>
         <div>
-          <h5>[POST] a new person</h5>
+          <h5>Add (post) a new person</h5>
           name: <input type='text' ref={this.inputNameRef} /><br />
           age: <input type='text' ref={this.inputAgeRef} /><br />
           email: <input type='text' ref={this.inputEmailRef} /><br />
           <button onClick={this.postNewPerson}>submit new person</button>
+        </div>
+        <div>
+          <h5>Update (put) a new person</h5>
+          id: <input type='text' ref={this.editIdRef} /><br />
+          name: <input type='text' ref={this.editNameRef} /><br />
+          age: <input type='text' ref={this.editAgeRef} /><br />
+          email: <input type='text' ref={this.editEmailRef} /><br />
+          <button onClick={this.putPerson}>UPDATE</button>
         </div>
       </div>
     );
