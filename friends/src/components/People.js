@@ -15,6 +15,7 @@ class People extends React.Component {
                         <Friend
                             person={person}
                             key={person.id}
+                            deletePerson={this.props.deletePerson}
                         />
                     )}
                 </div>

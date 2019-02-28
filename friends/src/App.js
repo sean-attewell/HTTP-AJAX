@@ -41,6 +41,16 @@ class App extends Component {
       .catch(this.setError)
   }
 
+  deletePerson = id => {
+    // alert(`Are you sure you want to delete person with ID: ${id}`);
+
+    this.resetError();
+
+    axios.delete(`${friendsURL}/${id}`)
+      .then(res => this.setPeople(res.data))
+      .catch(this.setError)
+  }
+
   // STATE MANAGEMENT
 
   setPeople = people => {
@@ -62,6 +72,7 @@ class App extends Component {
         <div >
           <People
             people={this.state.people}
+            deletePerson={this.deletePerson}
           />
         </div>
         <div>
